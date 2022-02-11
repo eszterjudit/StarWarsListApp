@@ -2,37 +2,40 @@ package com.example.starwarslist
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.starwarslist.ui.theme.StarWarsListTheme
+import androidx.activity.viewModels
+import com.example.starwarslist.api.ApiResult
+import com.example.starwarslist.databinding.ActivityMainBinding
+import com.example.starwarslist.viewmodel.MainViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    private val mainViewModel by viewModels<MainViewModel>()
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            StarWarsListTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(color = MaterialTheme.colors.background) {
-                    Greeting("Android")
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        fetchPlanets()
+    }
+
+    private fun fetchPlanets() {
+        mainViewModel.fetchPlanets()
+        mainViewModel.response.observe(this) { response ->
+            when (response) {
+                is ApiResult.Success -> {
+                    response.data?.let {
+                        binding.hello.text = "First planet in list is " + response.data.results[0].name
+                    }
+                }
+                is ApiResult.Error -> {
+                    // show error message
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    StarWarsListTheme {
-        Greeting("Android")
     }
 }
