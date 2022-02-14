@@ -8,7 +8,7 @@ import kotlinx.parcelize.Parcelize
 data class Planet(
 
     @SerializedName("name")
-    val name: String,
+    var name: String,
 
     @SerializedName("population")
     val population: String,
