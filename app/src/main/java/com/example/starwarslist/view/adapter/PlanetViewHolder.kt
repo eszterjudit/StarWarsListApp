@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.starwarslist.R
 import com.example.starwarslist.databinding.PlanetListItemBinding
 import com.example.starwarslist.model.Planet
-import com.example.starwarslist.util.ColorUtils
+import com.example.starwarslist.util.ColorUtils.getColorWithAlpha
 
 class PlanetViewHolder(private val binding: PlanetListItemBinding, private val context: Context) :
     RecyclerView.ViewHolder(binding.root) {
@@ -24,7 +24,10 @@ class PlanetViewHolder(private val binding: PlanetListItemBinding, private val c
 
     private fun setTextForWater(planet: Planet?) {
         if (planet?.surfaceWater != null && planet.surfaceWater != context.getString(R.string.unknown)) {
-            binding.surfaceWater.text = String.format(context.getString(R.string.planet_surface_water_percentage), planet.surfaceWater)
+            binding.surfaceWater.text = String.format(
+                context.getString(R.string.planet_surface_water_percentage),
+                planet.surfaceWater
+            )
         } else {
             binding.surfaceWater.setText(R.string.planet_unknown_surface_water)
         }
@@ -33,11 +36,11 @@ class PlanetViewHolder(private val binding: PlanetListItemBinding, private val c
     private fun setBgColorForWater(planet: Planet?) {
         if (planet?.surfaceWater != null && planet.surfaceWater != context.getString(R.string.unknown) && planet.surfaceWater != "0") {
             binding.planetCardBg.setCardBackgroundColor(
-                ColorUtils.getColorWithAlpha(
+                getColorWithAlpha(
                     ContextCompat.getColor(
                         context,
                         R.color.secondaryColor
-                    ), planet.surfaceWater.toFloat()
+                    ), planet.surfaceWater.toInt()
                 )
             )
         } else {
