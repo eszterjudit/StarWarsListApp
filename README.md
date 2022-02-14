@@ -9,3 +9,5 @@ The app is meant to demonstrate the usage of the following features:
 <li>MVVM architecture, arch components</li>
 <li>MockK, Junit and Espresso for testing</li>
 </ul>
+<p>
+<img src="https://raw.githubusercontent.com/eszterjudit/StarWarsListApp/master/app/src/main/res/drawable/screenshot.png" width="300px" alt="List of planets" title="Screenshot">
