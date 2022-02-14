@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">StarWarsList</string>
+    <string name="app_name">Star Wars Planets</string>
+    <string name="planet_terrain">Terrain: %1$s</string>
+    <string name="planet_population">Population: %1$s</string>
+    <string name="planet_unknown_surface_water">U</string>
+    <string name="planet_surface_water_percentage">%1$s%%</string>
+    <string name="unknown">unknown</string>
 </resources>
