@@ -1,12 +1,10 @@
 package com.example.starwarslist.api
 
 import com.example.starwarslist.model.PlanetsResponse
-import com.example.starwarslist.util.Constants
-import dagger.Provides
-import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface Service {
-    @GET("planets")
-    suspend fun getPlanets(): Response<PlanetsResponse>
+    @GET("planets/?page/")
+    suspend fun getPlanets(@Query("page") page: Int): PlanetsResponse
 }
